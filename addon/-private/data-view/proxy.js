@@ -1,15 +1,29 @@
-import Geography from 'vertical-collection/-private/data-view/geography';
-
 export default class Proxy {
-  constructor(key, ref, height = 0, top = 0) {
-    this.key = key;
+  constructor(key, ref) {
+    this.key = key; // string
     this.ref = ref;
-    this._dirtied = 0;
     this.index = 0;
-    this.geography = new Geography(null, { height, top });
+    this.begin_bound_offset = 0;
+    this.end_bound_offset = 0;
+    this.scalar = 0;
+  }
+}
+
+const NULL_INT = 0;
+
+class LazySkipList {
+  constructor(data) {
+    let size = this.length = data.length;
+    this.keys = new Array(size);
+    this.bounds = new Uint16Array(3 * size);
+    this.data = data;
   }
 
-  get height() {
-    return this.geography.height;
+  get() {
+
+  }
+
+  set() {
+
   }
 }
