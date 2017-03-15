@@ -74,11 +74,10 @@ export default class DynamicRadar extends Radar {
 
     let totalDelta = 0;
 
-    for (let i = 0; i < orderedComponents.length; i++) {
+    for (let i = 0, len = orderedComponents.length; i < len; i++) {
       let itemIndex = firstItemIndex + i;
 
       const currentItem = orderedComponents[i];
-
       if (currentItem.hasBeenMeasured === false) {
         const previousItem = orderedComponents[i - 1];
 

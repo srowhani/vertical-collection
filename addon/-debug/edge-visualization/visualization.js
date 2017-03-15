@@ -177,9 +177,9 @@ export default class Visualization {
       items: { length },
       totalBefore,
       totalAfter,
-      skipList: { values }
+      skipList
     } = this.radar;
-
+    const values = skipList ? skipList.values : []
     const totalVisualizedItems = sats.length;
     let firstVisualizedIndex = firstItemIndex - 10;
     let lastVisualizedIndex = lastItemIndex + 10;
