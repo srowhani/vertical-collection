@@ -16,6 +16,9 @@
       {{!- END-SNIPPET }}
     </div>
     <div class="col-sm-6">
+      <button {{action 'removeItems'}}>Remove Items</button>
+      <label>Number of items to remove{{input type='range' value=numItemsToRemove}}</label>
+      {{numItemsToRemove}}
       <h3>Infinite Scroll</h3>
       <p>
         The Vertical Collection can be used to quickly build a robust infinite scroll.
