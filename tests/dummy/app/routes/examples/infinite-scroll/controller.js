@@ -14,23 +14,28 @@ export default Controller.extend({
   actions: {
 
     loadAbove() {
-      let first = this.get('model.first');
-      let numbers = getNumbers(first - 20, 20);
-      let model = this.get('model.numbers');
-      model.unshiftObjects(numbers);
-      // this.set('model.numbers', newModel);
-      this.set('model.first', first - 20);
+      // let first = this.get('model.first');
+      // let numbers = getNumbers(first - 20, 20);
+      // let model = this.get('model.numbers');
+      // model.unshiftObjects(numbers);
+      // // this.set('model.numbers', newModel);
+      // this.set('model.first', first - 20);
     },
 
     loadBelow() {
-      let last = this.get('model.last');
-      let numbers = getNumbers(last, 20);
-      let model = this.get('model.numbers');
-      model.pushObjects(numbers);
-      // this.set('model.numbers', newModel);
-      this.set('model.last', last + 20);
+      // let last = this.get('model.last');
+      // let numbers = getNumbers(last, 20);
+      // let model = this.get('model.numbers');
+      // model.pushObjects(numbers);
+      // // this.set('model.numbers', newModel);
+      // this.set('model.last', last + 20);
     },
-
+    removeItems () {
+      const len = this.get('model.numbers').length
+      this.get('model.numbers').splice(0, 20)
+      this.set('model.numbers', this.get('model.numbers').slice())
+      console.log(this.get('model.numbers').length)
+    },
     setMinHeight() {
       this.set('someProperty', 90);
     }

@@ -155,7 +155,8 @@ const VerticalCollection = Component.extend({
     this._prevLastVisibleIndex = lastVisibleIndex;
   },
 
-  radar: computed('items.[]', function() {
+  radar: computed('items', 'items.[]', function() {
+    console.log('radar recomputed')
     const {
       _radar,
 
@@ -174,13 +175,18 @@ const VerticalCollection = Component.extend({
     this._prevLastKey = keyForItem(items[items.length - 1], key, items.length - 1);
 
     if (isPrepend(lenDiff, items, key, _prevFirstKey, _prevLastKey)) {
+      console.log('prepend')
       this._prevFirstItemIndex += lenDiff;
       this._prevFirstVisibleIndex += lenDiff;
 
       _radar.prepend(items, lenDiff);
     } else if (isAppend(lenDiff, items, key, _prevFirstKey, _prevLastKey)) {
+      console.log('append')
+
       _radar.append(items, lenDiff);
     } else if (!isSameArray(lenDiff, items, key, _prevFirstKey, _prevLastKey)) {
+      console.log('reset')
+
       _radar.resetItems(items);
     }
 

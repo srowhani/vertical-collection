@@ -78,7 +78,7 @@ module.exports = {
         chalk.grey("\t:: To debug your applied CSS rules, set ") + chalk.yellow("{{#vertical-collection debugCSS=true}}") +
         chalk.grey("\n===================================================================\n")
       );
-
+      console.log('we here')
       app.import('./vendor/debug.css');
     }
   },

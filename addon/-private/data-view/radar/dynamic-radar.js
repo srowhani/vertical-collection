@@ -208,7 +208,14 @@ export default class DynamicRadar extends Radar {
   }
 
   resetItems(items) {
-    this.skipList = new SkipList(items.length, this.minHeight);
+    console.log('reset-items')
+    const itemsLength = items.length;
+    if (itemsLength < this.orderedComponents.length) {
+      this.orderedComponents.length = itemsLength
+      // this.virtualComponents.length = itemsLength
+      this._updateVirtualComponentPool()
+    }
+    this.skipList = new SkipList(itemsLength, this.minHeight);
     this._firstRender = true;
 
     super.resetItems(items);

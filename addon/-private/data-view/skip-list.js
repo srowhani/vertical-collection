@@ -120,20 +120,22 @@ export default class SkipList {
     totalAfter = total - totalBefore;
 
     assert('index must be a number', typeof index === 'number');
-    assert('index must be within bounds', index >= 0 && index < this.values.length);
+    assert('index must be within bounds', index >= 0 && index <= this.values.length);
 
     return { index, totalBefore, totalAfter };
   }
 
   set(index, value) {
+    // console.table([{index, value}])
     assert('value must be a number', typeof value === 'number');
     assert('index must be a number', typeof index === 'number');
-    assert('index must be within bounds', index >= 0 && index < this.values.length);
-
+    assert('index must be within bounds', index >= 0 && index <= this.values.length);
+    if (index === this.values.length) {
+      return
+    }
     const { layers } = this;
     const oldValue = layers[layers.length - 1][index];
     const delta = value - oldValue;
-
     if (delta === 0) {
       return delta;
     }
@@ -147,7 +149,6 @@ export default class SkipList {
 
       index = Math.floor(index / 2);
     }
-
     this.total += delta;
 
     return delta;
