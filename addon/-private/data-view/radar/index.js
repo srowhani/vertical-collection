@@ -299,8 +299,22 @@ export default class Radar {
     this.scheduleUpdate();
   }
 
+  removeItems (items, removedItems) {
+    console.log('isRemoval')
+    removedItems.forEach(item => {
+      for (let i = 0 ; i < this.orderedComponents.length; i++) {
+        if (this.orderedComponents[i].content === item) {
+          console.log('hit')
+          this.orderedComponents.splice(i, 1)
+          break;
+        }
+      }
+    })
+    this.scheduleUpdate();
+  }
+
   resetItems(items) {
-    this.items = items;
+    this.items = items.slice();
 
     this._updateVirtualComponentPool();
     this.scheduleUpdate();

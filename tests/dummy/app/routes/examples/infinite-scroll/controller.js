@@ -39,7 +39,6 @@ export default Controller.extend({
     removeMe(index) {
       const numbers = this.get('model.numbers').slice()
       numbers.splice(index, 100)
-      console.log(numbers.length)
       this.set('model.numbers', Ember.A(numbers))
     }
   }
