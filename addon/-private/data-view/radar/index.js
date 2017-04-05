@@ -214,7 +214,8 @@ export default class Radar {
     }
 
     for (let i = 0, itemIndex = firstItemIndex; itemIndex <= lastItemIndex; i++, itemIndex++) {
-      orderedComponents[i].recycle(items[itemIndex], itemIndex);
+      if (!!items[itemIndex])
+        orderedComponents[i].recycle(items[itemIndex], itemIndex);
     }
 
     itemContainer.style.marginTop = `${totalBefore}px`;
@@ -249,7 +250,8 @@ export default class Radar {
       minHeight,
       virtualComponents,
       orderedComponents,
-      totalItems
+      totalItems,
+      items
     } = this;
 
     // The total number of components is determined by the minimum number required to span the
@@ -258,7 +260,6 @@ export default class Radar {
     const totalHeight = scrollContainerHeight + (scrollContainerHeight * bufferSize * 2);
     const totalComponents = Math.min(totalItems, Math.ceil(totalHeight / minHeight) + 1);
     const delta = totalComponents - virtualComponents.get('length');
-
     if (delta > 0) {
       for (let i = 0; i < delta; i++) {
         let component = VirtualComponent.create(this.token);
@@ -267,7 +268,6 @@ export default class Radar {
         virtualComponents.pushObject(component);
         orderedComponents.push(component);
       }
-
       this.schedule('sync', () => {
         const firstIndex = orderedComponents.length - delta;
         const lastIndex = orderedComponents.length - 1;

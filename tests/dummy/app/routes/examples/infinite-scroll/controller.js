@@ -14,6 +14,7 @@ export default Controller.extend({
   actions: {
 
     loadAbove() {
+      return
       let first = this.get('model.first');
       let numbers = getNumbers(first - 20, 20);
       let model = this.get('model.numbers');
@@ -23,6 +24,7 @@ export default Controller.extend({
     },
 
     loadBelow() {
+      return;
       let last = this.get('model.last');
       let numbers = getNumbers(last, 20);
       let model = this.get('model.numbers');
@@ -33,6 +35,12 @@ export default Controller.extend({
 
     setMinHeight() {
       this.set('someProperty', 90);
+    },
+    removeMe(index) {
+      const numbers = this.get('model.numbers').slice()
+      numbers.splice(index, 100)
+      console.log(numbers.length)
+      this.set('model.numbers', Ember.A(numbers))
     }
   }
 

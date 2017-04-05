@@ -46,6 +46,9 @@ export default Component.extend({
 
     return htmlSafe(styleStr);
   }),
+  click () {
+    this.sendAction('onRemoval')
+  },
   layout,
   index: 0,
   item: null,

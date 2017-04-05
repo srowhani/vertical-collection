@@ -180,6 +180,10 @@ const VerticalCollection = Component.extend({
       _radar.prepend(items, lenDiff);
     } else if (isAppend(lenDiff, items, key, _prevFirstKey, _prevLastKey)) {
       _radar.append(items, lenDiff);
+    } else if (isRemoval(lenDiff)) {
+      console.debug('isRemoval')
+      _radar.resetItems(items);
+      // Rebuild the skiplist
     } else if (!isSameArray(lenDiff, items, key, _prevFirstKey, _prevLastKey)) {
       _radar.resetItems(items);
     }
@@ -195,8 +199,6 @@ const VerticalCollection = Component.extend({
   didInsertElement() {
     // The rendered {{each}} is removed from the DOM, but a reference is kept, allowing Glimmer to
     // continue rendering to the node. This enables the manual diffing strategy described above.
-    this._virtualComponentRenderer = this.element.getElementsByClassName('virtual-component-renderer')[0];
-    this.element.removeChild(this._virtualComponentRenderer);
 
     const containerSelector = this.get('containerSelector');
 
@@ -360,6 +362,10 @@ function isSameArray(lenDiff, newItems, key, oldFirstKey, oldLastKey) {
   const newLastKey = keyForItem(newItems[newItems.length - 1], key, newItems.length - 1);
 
   return oldFirstKey === newFirstKey && oldLastKey === newLastKey;
+}
+
+function isRemoval(lenDiff) {
+  return lenDiff < 0
 }
 
 export default VerticalCollection;
