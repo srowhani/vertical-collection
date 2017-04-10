@@ -33,6 +33,12 @@ export default Controller.extend({
 
     setMinHeight() {
       this.set('someProperty', 90);
+    },
+
+    remove(index) {
+      const numbers = this.get('model.numbers').slice()
+      numbers.splice(index, 5)
+      this.set('model.numbers', Ember.A(numbers))
     }
   }
 

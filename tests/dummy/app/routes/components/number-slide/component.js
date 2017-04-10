@@ -49,5 +49,8 @@ export default Component.extend({
   layout,
   index: 0,
   item: null,
-  number: computed.alias('item.number')
+  number: computed.alias('item.number'),
+  click () {
+    this.sendAction('remove')
+  }
 });

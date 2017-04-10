@@ -66,7 +66,7 @@ export default class VirtualComponent {
 
     this._upperBound = null;
     this._lowerBound = null;
-
+    this.inDOM = false;
     set(this, 'content', null);
   }
 

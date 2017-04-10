@@ -259,25 +259,35 @@ export default class Radar {
     const totalComponents = Math.min(totalItems, Math.ceil(totalHeight / minHeight) + 1);
     const delta = totalComponents - virtualComponents.get('length');
 
-    if (delta > 0) {
-      for (let i = 0; i < delta; i++) {
-        let component = VirtualComponent.create(this.token);
-        set(component, 'content', {});
+    if (delta) {
+      if (delta > 0) {
+        for (let i = 0; i < delta; i++) {
+          let component = new VirtualComponent(this.token);
+          set(component, 'content', {});
 
-        virtualComponents.pushObject(component);
-        orderedComponents.push(component);
+          virtualComponents.pushObject(component);
+        }
+      } else if (!isNaN(delta)){
+        const len = virtualComponents.length;
+        for (let i = len - 1; i > len + delta; i--) {
+          virtualComponents[i].destroy;
+        }
       }
 
-      this.schedule('sync', () => {
-        const firstIndex = orderedComponents.length - delta;
-        const lastIndex = orderedComponents.length - 1;
+      virtualComponents.length = totalComponents;
+      orderedComponents.length = totalComponents;
 
-        VirtualComponent.moveComponents(this.itemContainer, orderedComponents[firstIndex], orderedComponents[lastIndex]);
+      for (let i = 0; i < totalComponents; i++) {
+        orderedComponents[i] = virtualComponents[i];
+      }
 
-        for (let i = firstIndex; i <= lastIndex; i++) {
-          orderedComponents[i].inDOM = true;
-        }
-      });
+      if (delta >= 0) {
+        VirtualComponent.moveComponents(
+          this.itemContainer,
+          orderedComponents[orderedComponents.length - delta],
+          orderedComponents[orderedComponents.length - 1]
+        );
+      }
     }
   }
 
@@ -301,7 +311,7 @@ export default class Radar {
 
   resetItems(items) {
     this.items = items;
-
+    console.log(items)
     this._updateVirtualComponentPool();
     this.scheduleUpdate();
   }
