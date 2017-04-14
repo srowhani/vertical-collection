@@ -30,6 +30,9 @@
         in-media-res: ideal for caching their position in a long feed for when
         they return.
       </p>
+      <button {{action 'removeByPop'}}>Pop</button>
+      <button {{action 'removeByShift'}}>Shift</button>
+      <button {{action 'removeByReset'}}>Reset</button>
       <h4>Code for Demo</h4>
       {{code-snippet name="infinite-scroll-example.hbs"}}
     </div>
